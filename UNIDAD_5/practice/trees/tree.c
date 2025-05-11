@@ -41,10 +41,10 @@ int cmp_minMax(BTREE_ELEM a, BTREE_ELEM b){
     return ans;
 }
 
-int btn_add(btn** ptr_root, btn* new_btn){
+int btn_add(btn** ptr_root, btn* new_btn, int cmp(BTREE_ELEM, BTREE_ELEM)){
     int flag_added = 0;
     if(new_btn != NULL){
-        btn** position = btn_find(ptr_root, new_btn->data, cmp_minMax);
+        btn** position = btn_find(ptr_root, new_btn->data, cmp);
         if(*position == NULL){
             *position == new_btn;
             flag_added = 1;
@@ -53,20 +53,32 @@ int btn_add(btn** ptr_root, btn* new_btn){
     return flag_added;
 } //si devuelve 0 es porque ya se encuentra ese elemento en la lista
 
-btn btn_rmv(btn** ptr_node, BTREE_ELEM data){
-    btn* btn
-}
-btn* btn_rmvNode(btn** ptr_node){
+btn* btn_rmvBranch(btn** ptr_node){
     btn* aux = *ptr_node;
     *ptr_node = NULL; 
 } //lo saca del branch
-void btr_free(btn* ptr_node){
-    if(ptr_node != NULL){
-        btr_free(ptr_node->left);
-        btr_node(ptr_node->right);
-        free(ptr_node);
+void btn_freeBranch(btn** ptr_node){
+    btn* node = *ptr_node;
+    if(node != NULL){
+        btn_freeBranch(&(node->left));
+        btn_freeBranch(&(node->right));
+        free(node);
     }
-} //elimina todos los nodes conectados
+    *ptr_node = NULL;
+} //elimina todo el branch
+
+btn* btn_rmvNode(btn** ptr_root, BTREE_ELEM data_find, int cmp(BTREE_ELEM, BTREE_ELEM)){
+    btn* removed_node = NULL;
+    btn** ptr_found = btn_find(ptr_root, data_find, cmp);
+    if(*ptr_found != NULL){
+        removed_node = *ptr_found;
+        btn_add( &((*ptr_found)->right), (*ptr_found)->left, cmp);
+        *ptr_found = (*ptr_found)->left;
+        removed_node->left = NULL;
+        removed_node->right = NULL;
+    }
+    return removed_node;
+}
 
 int btn_size(btn* root){
     int suma = 0;
@@ -78,5 +90,5 @@ int btn_size(btn* root){
     return suma;
 }
 
-
-
+//Devolver la profundidad de un nodo. La profundidad de un nodo es 1 más la profundidad de su padre.
+//Considerar 0 (cero) la profundidad de la raíz.
