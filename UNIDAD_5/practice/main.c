@@ -15,7 +15,7 @@ int main()
     failed_adds += btn_add(&root, btn_create(7));
     failed_adds += btn_add(&root, btn_create(8));
     failed_adds += btn_add(&root, btn_create(9));
-    
+
     btn_draw(root, toStr);
 
     btn_freeBranch(&root);
