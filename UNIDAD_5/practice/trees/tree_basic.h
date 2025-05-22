@@ -21,6 +21,8 @@ btn* btn_rmvNode(btn** ptr_root, BTREE_ELEM data_find);
 int btn_contains(btn* root, BTREE_ELEM find);
 int btn_size(btn* root);
 btn** btn_find(btn** ptr_btn, BTREE_ELEM data_find);
+int btn_height(btn* node);
+int _max_value(BTREE_ELEM a, BTREE_ELEM b);
 
 //ADICIONALES
 int _btn_print(btn *tree, int is_left, int offset, int depth, char s[20][255], void toStr (btn*, char*));

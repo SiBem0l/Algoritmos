@@ -102,6 +102,7 @@ btn** btn_find(btn** ptr_btn, BTREE_ELEM data_find){
     return ptr_btn;
 }
 
+//Cantidad de nodos en el arbol
 int btn_size(btn* root){
     int suma = 0;
     if(root != NULL){
@@ -112,6 +113,42 @@ int btn_size(btn* root){
     return suma;
 }
 
+//Altura de un nodo
+int btn_height(btn* node){
+    int height_left = 0;
+    int height_right = 0;
+    if(node != NULL){
+        height_left = btn_height(node->left) + 1;
+        height_right = btn_height(node->right) + 1;
+    }
+    return _max_value(height_left, height_right);
+}
+int _max_value(BTREE_ELEM a, BTREE_ELEM b){
+    int ans = 0;
+    if(a > b){
+        ans = a;
+    }else{
+        ans = b;
+    }
+    return ans;
+}
+
+//Nivel del nodo                          default = 1 
+int btn_level(btn* node, BTREE_ELEM data, int curr_level){
+    int ans = 0;
+    if(node){
+        if(node->data != data){
+            if(data < node->data){
+                ans = btn_level(node->left, data, curr_level + 1);
+            }else{
+                ans = btn_level(node->right, data, curr_level + 1);
+            }
+        }else{
+            ans = curr_level;
+        }
+    }
+    return ans;
+}
 
 
 //ADICIONALES
