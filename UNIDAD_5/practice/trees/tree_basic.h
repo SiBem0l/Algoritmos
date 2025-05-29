@@ -14,7 +14,7 @@ btn* btn_create(BTREE_ELEM new_data);
 void btn_print(btn* root);
 int btn_add(btn** ptr_root, btn* new_btn);
 btn* btn_rmvBranch(btn** ptr_node);
-void btn_freeBranch(btn** ptr_node);
+int btn_freeBranch(btn** ptr_node);
 btn* btn_rmvNode(btn** ptr_root, BTREE_ELEM data_find);
 
 //FUNCIONES DE BUSQUEDA Y CONTEO

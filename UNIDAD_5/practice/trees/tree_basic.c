@@ -47,14 +47,17 @@ btn* btn_rmvBranch(btn** ptr_node){
 } 
 
 //Elimina al nodo con todo lo que tenga enganchado
-void btn_freeBranch(btn** ptr_node){
+int btn_freeBranch(btn** ptr_node){
     btn* node = *ptr_node;
+    int flag_free = 0;
     if(node != NULL){
         btn_freeBranch(&(node->left));
         btn_freeBranch(&(node->right));
         free(node);
+        flag_free = 1;
     }
     *ptr_node = NULL;
+    return flag_free;
 }
 
 //Busca al elemnto que se pide y lo elimina del arbol
@@ -115,13 +118,11 @@ int btn_size(btn* root){
 
 //Altura de un nodo
 int btn_height(btn* node){
-    int height_left = 0;
-    int height_right = 0;
-    if(node != NULL){
-        height_left = btn_height(node->left) + 1;
-        height_right = btn_height(node->right) + 1;
+    int ans = -1;
+    if(node){
+        ans = _max_value(btn_height(node->left) + 1, btn_height(node->right) + 1);
     }
-    return _max_value(height_left, height_right);
+    return ans;
 }
 int _max_value(BTREE_ELEM a, BTREE_ELEM b){
     int ans = 0;
