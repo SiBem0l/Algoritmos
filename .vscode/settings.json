@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "tree_avl.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "tree_basic.h": "c",
+        "btrees_func.h": "c",
+        "list.h": "c"
     }
 }
