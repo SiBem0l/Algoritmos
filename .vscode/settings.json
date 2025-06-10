@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "ntree_basic.h": "c"
+        "ntree_basic.h": "c",
+        "cstdlib": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "graph.h": "c"
     }
 }

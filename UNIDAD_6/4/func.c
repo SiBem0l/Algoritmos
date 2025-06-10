@@ -49,3 +49,19 @@ void print(ntn* root){
 }
 
 //Remueve un nodo remplazando por su hijo de mas a la izquierda
+ntn* ntn_remove(ntn** ptr_node){
+    //node tiene que existir y tener al menos 1 hijo
+    if(*ptr_node == NULL || (*ptr_node)->child == NULL) return NULL;
+
+    ntn* removed_node = *ptr_node;
+    *ptr_node = (*ptr_node)->child->node; //es el nuevo root
+    removed_node->child->node = NULL;
+    ntlist** ptr_curr_list = &((*ptr_node)->child);
+    while(*ptr_curr_list != NULL){
+        ptr_curr_list = &((*ptr_curr_list)->next);
+    }
+    *ptr_curr_list = removed_node->child->next;
+    removed_node->child->next = NULL;
+
+    return removed_node;
+}

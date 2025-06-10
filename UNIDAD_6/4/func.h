@@ -8,4 +8,6 @@ void add_sons(ntn* father, NTREE_ELEMENT a, NTREE_ELEMENT b);
 
 void print(ntn* root);
 
+ntn* ntn_remove(ntn** ptr_node);
+
 #endif

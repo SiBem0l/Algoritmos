@@ -4,6 +4,9 @@
 int main()
 {
     ntn* root = create_ntree();
+
+    ntn_remove(&root);
+
     print_amplitud(root);
     print(root);
     return 0;
