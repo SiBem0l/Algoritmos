@@ -6,9 +6,8 @@ vector* vector_new(int ini_size){
    vector* v;
    v = (vector*)malloc(sizeof(vector));
 
-   v->data = (VECTOR_ELEMENT*)malloc(sizeof(VECTOR_ELEMENT)*ini_size);
-   v->size = 0;
-   v->max_size = ini_size;
+   v->data = (VECTOR_ELEMENT*)calloc(ini_size, sizeof(VECTOR_ELEMENT));
+   v->size = ini_size;
    return v;
 }
 
@@ -22,14 +21,6 @@ int vector_size(vector* v){
    return v->size;
 }
 
-int vector_isfull(vector* v){
-    if(v->max_size == v->size){
-        return 1;
-    }else{
-        return 0;
-    }
-}
-
 int vector_isempty(vector* v){
     if(v->size == 0){
         return 1;
@@ -38,7 +29,7 @@ int vector_isempty(vector* v){
     }
 }
 
-VECTOR_ELEMENT vector_get(vector* v, int index){
+VECTOR_ELEMENT vector_seek(vector* v, int index){
     return (v->data)[index]; 
 }  
 
@@ -53,20 +44,6 @@ int vector_add(vector* v, VECTOR_ELEMENT value){
         v->data[v->size] = value;
         (v->size)++;
         return 0; 
-    }
-}
-
-int vector_insert(vector* v, int index, VECTOR_ELEMENT value){
-    if(vector_isfull(v)){
-        return 1;
-    }else if((index < 0) && (index >= v->max_size)){
-        return 1;
-    }else{
-        for(int i = (v->size - 1); i >= index; i--){
-            v->data[i+1] = v->data[i];
-        }
-        v->data[index] = value;
-        (v->size)++;
     }
 }
 

@@ -5,6 +5,10 @@
         "string.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "graph.h": "c"
+        "graph.h": "c",
+        "type_traits": "c",
+        "matrix.h": "c",
+        "list": "c",
+        "random": "c"
     }
 }
